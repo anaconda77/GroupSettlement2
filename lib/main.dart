@@ -119,6 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState(){
+    super.initState();
     //_checkToken(me.serviceUserId!);
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       RemoteNotification? notification = message.notification;
@@ -141,7 +142,6 @@ class _MyHomePageState extends State<MyHomePage> {
         });
       }
     });
-    super.initState();
   }
 
   @override
