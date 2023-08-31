@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _checkToken(String userid) async {
     ServiceUser user = await ServiceUser().getUserByUserId(userid);
     int nowtime = DateTime.now().millisecondsSinceEpoch;
-    if(user.fcmToken == null || (nowtime - user.tokenTimestamp!) / (1000*60*60*24*30) >= 28)
+    if(user.fcmToken == null || ((nowtime - user.tokenTimestamp!) / (1000*60*60*24*30)) >= 28)
       {
         _getMyDeviceToken(user);
         FireService().updateDoc("userlist", userid, user.toJson());
