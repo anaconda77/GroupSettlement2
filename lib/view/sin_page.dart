@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:groupsettlement2/class/class_user.dart';
+import 'package:groupsettlement2/viewmodel/UserViewModel.dart';
 
 class SinPage extends StatefulWidget {
   const SinPage({super.key});
@@ -9,6 +12,12 @@ class SinPage extends StatefulWidget {
 
 class _SinPageState extends State<SinPage> {
   int firstSuccessCount = 0;
+  UserViewModel? uvm;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +91,18 @@ class _SinPageState extends State<SinPage> {
               ],
             ),
           ),
-          Container(height: size.height * 0.2, color: Colors.grey[700]),
-          Container(height: size.height * 0.2, color: Colors.grey[800]),
-          Container(height: size.height * 0.2, color: Colors.grey[850]),
+          FutureBuilder<UserViewModel>(
+              future: UserViewModel("69906") as Future<UserViewModel>,
+              builder: (context, snapshot) {
+                if(snapshot.hasData) {
+                  UserViewModel uvm = snapshot.data!;
+                  return Text(uvm.userData!.name!);
+                }
+                else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              }
+          ),
         ],
       ),
     );
